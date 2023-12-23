@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #E3F5FF;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .calculator{
+            background-color: #3B4455;
+            width: 280px;
+            height: 470px;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+        .display{
+            width: 100%;
+            height: 60px;
+            border: none;
+            outline: none;
+            text-align: right;
+            font-size: 35px;
+            margin: 10px 0px;
+            background-color: transparent;
+            color: white;
+        }
+        .buttons{
+            display: flex;
+            justify-content: space-between;
+        }
+        input[type="button"]{
+            width: 60px;
+            height: 60px;
+            margin-top: 15px;
+            background-color: transparent;
+            color: white;
+            font-size: 20px;
+            border: 0;
+            border-radius: 10px;
+            box-shadow: -5px -5px 15px #ffffff1a,7px 7px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        #equal{
+            width: 133px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="babu" class="display">
+        <div class="buttons">
+            <input type="button" value="AC" onclick="babu.value = ''">
+            <input type="button" value="DE" onclick="babu.value = babu.value.toString().slice(0,-1)">
+            <input type="button" value="." onclick="babu.value += '.'">
+            <input type="button" value="/" onclick="babu.value += '/'">
+        </div>
+        <div class="buttons">
+            <input type="button" value="7" onclick="babu.value += '7'">
+            <input type="button" value="8" onclick="babu.value += '8'">
+            <input type="button" value="9" onclick="babu.value += '9'">
+            <input type="button" value="*" onclick="babu.value += '*'">
+        </div>
+        <div class="buttons">
+            <input type="button" value="4" onclick="babu.value += '4'">
+            <input type="button" value="5" onclick="babu.value += '5'">
+            <input type="button" value="6" onclick="babu.value += '6'">
+            <input type="button" value="-" onclick="babu.value += '-'">
+        </div>
+        <div class="buttons">
+            <input type="button" value="1" onclick="babu.value += '1'">
+            <input type="button" value="2" onclick="babu.value += '2'">
+            <input type="button" value="3" onclick="babu.value += '3'">
+            <input type="button" value="+" onclick="babu.value += '+'">
+        </div>
+        <div class="buttons">
+            <input type="button" value="00" onclick="babu.value += '00'">
+            <input type="button" value="0" onclick="babu.value += '0'">
+            <input type="button" value="=" id="equal" onclick="babu.value = eval(babu.value)">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 600px;
+            height: 500px;
+            background-color: blanchedalmond;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <input type="text" name="" id="input">
+</body>
+<script>
+    document.querySelector(".box").addEventListener('click',(e)=>{
+
+
+
+        // let key = e.ctrlKey
+        // let key = e.altKey
+        // let key = e.shiftKey
+        let key = e.metaKey
+
+        console.log(key);
+    })
+
+    document.querySelector("#input").addEventListener("keydown",(e)=>{
+        console.log(e.key);
+        console.log(e.keyCode);
+    })
+</script>
+</html>

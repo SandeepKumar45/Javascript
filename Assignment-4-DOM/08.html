@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+      .box {
+        border: 1px solid white;
+        border-radius: 3px;
+        padding: 12px;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+  <script>
+    let timeBox = document.querySelector(".box")
+    setInterval(()=>{
+        let date = new Date()
+        let time = `${date.getHours().toString().padStart(2,"0")} : ${date.getMinutes().toString().padStart(2,"0")} : ${date.getSeconds().toString().padStart(2,"0")}`
+        timeBox.innerHTML = time
+        let bgc = `#${date.getHours().toString().padStart(2,"0")}${date.getMinutes().toString().padStart(2,"0")}${date.getSeconds().toString().padStart(2,"0")}`
+        document.body.style.backgroundColor = bgc
+        console.log(bgc);
+    },1000)
+  </script>
+</html>

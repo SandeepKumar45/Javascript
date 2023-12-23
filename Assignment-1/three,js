@@ -1,0 +1,4 @@
+let amountInINR = 850
+let oneUSDInINR = 82
+let amountInUSD = amountInINR/oneUSDInINR
+console.log(amountInUSD+" USD")

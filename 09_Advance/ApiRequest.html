@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApiRequest</title>
+    <style>
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card{
+            width: 200px;
+            height: 220px;
+            color: white;
+        }
+        .profile{
+            width: 100%;
+            height: calc(100%-200px);
+        }
+        img{
+            border-radius: 8px;
+        }
+        p{
+            display: inline;
+            color: #cdc3c3;
+            margin-left: 3px;
+        }
+    </style>
+</head>
+<body style="background-color: #414141;">
+
+</body>
+<script>
+    let card = document.createElement('div');
+    card.className = "card"
+    const image = document.createElement('img')
+    image.className = "profile"
+    let followers = document.createElement('div')
+    card.appendChild(image);
+    card.appendChild(followers);
+    const xhr = new XMLHttpRequest()
+    const requestURL = 'https://api.github.com/users/hiteshchoudhary'
+    xhr.open('GET',requestURL)
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState);
+        if(xhr.readyState == 4){
+            const data = JSON.parse(this.responseText);
+            // console.log(data);
+            console.log(data.following);
+            image.src = data.avatar_url
+            followers.innerHTML = `<strong>${data.followers}</strong><p>followers</p>`
+        }
+    }
+    xhr.send()
+
+    document.body.appendChild(card)
+</script>
+</html>

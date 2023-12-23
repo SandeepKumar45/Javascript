@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121;">
+    <button id="orange">orange</button>
+    <button id="yellow">yellow</button>
+</body>
+<script>
+     // function init() {
+    //     let name = "Mozilla"; 
+    //     function displayName() {
+    //         console.log(name);   // lexical scope --> you can use parent function variables
+    //     }
+    //     displayName();
+    // }
+    // init();
+
+    // function outer(){
+    //     let username = "hitesh"
+    //     // console.log("OUTER", secret);
+    //     function inner(){
+    //         let secret = "my123"
+    //         console.log("inner", username);
+    //     }
+    //     function innerTwo(){
+    //         console.log("innerTwo", username);
+    //         // console.log(secret);
+    //     }
+    //     inner()
+    //     innerTwo()
+
+    // }
+    // outer()
+    // console.log("TOO OUTER", username);
+
+
+    // function makeFunc() {
+    //     const name = "Mozilla";
+    //     function displayName() {
+    //         console.log(name);
+    //     }
+    //     return displayName;  // here comes the concept of closures --> the inner function borrow
+                                //  the lexical scope(parent memory) 
+    // }
+
+    // const myFunc = makeFunc();
+    // myFunc();
+
+</script>
+<script>
+    function clickHandler(color){
+        return function(){
+            document.body.style.backgroundColor = color
+        }
+    }
+    document.getElementById("orange").addEventListener('click',clickHandler("orange"))
+    document.getElementById("yellow").addEventListener('click',clickHandler("yellow"))
+</script>
+</html>

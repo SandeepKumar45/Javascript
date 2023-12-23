@@ -1,0 +1,29 @@
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h2{
+    background-color: #212121;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+}
+.btn{
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-left: 15px;
+}
+.btn:hover{
+    background-color: #212121;
+    color: #ffffff;
+}
+#colorValue{
+    font-size: 20px;
+}
+div{
+    text-align: center;
+}

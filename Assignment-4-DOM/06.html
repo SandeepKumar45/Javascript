@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let heading = document.createElement("h3")
+    let select = document.createElement("select")
+
+    heading.innerText = "Which is favorite Programming Language:"
+
+    heading.style.display = "inline"
+
+    let language = ["JavaScript","Java","Python","C++","Ruby","Swift"]
+
+    for (const iterator of language) {
+        let option = document.createElement("option")
+        option.innerText = iterator
+        select.append(option)
+    }
+
+    document.body.appendChild(heading)
+    document.body.appendChild(select)
+</script>
+</html>

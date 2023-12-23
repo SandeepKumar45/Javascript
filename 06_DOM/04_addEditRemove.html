@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body style="background-color: #212121;color: #fff;">
+    <ul class="languages">
+        <li>JavaScript</li>
+        <li>Python</li>
+    </ul>
+</body>
+<script>
+    // const addLang = document.createElement("li")
+    // console.log(addLang);
+    // addLang.appendChild(document.createTextNode("java"))
+    // document.querySelector(".languages").appendChild(addLang)
+
+    function addLanguage(langName){
+        const addLang = document.createElement("li")
+        addLang.appendChild(document.createTextNode(langName))
+        document.querySelector(".languages").appendChild(addLang)
+    }
+    addLanguage("java")
+    addLanguage("goLang")
+
+    //   Edit
+    const secondLang = document.querySelector("li:nth-child(2)")
+    // secondLang.innerHTML = "mojo"
+    const li = document.createElement("li")
+    li.textContent = "mojo"
+    secondLang.replaceWith(li) 
+
+    //   Edit
+    const firstLang = document.querySelector("li:first-child")
+    const newli = document.createElement("li")
+    newli.appendChild(document.createTextNode("swift"))
+    firstLang.replaceWith(newli) 
+
+    //  Edit
+    const lastLang = document.querySelector("li:last-child")
+    lastLang.outerHTML = "<li>dart</li>"
+
+    // Remove
+    const lastElemnt = document.querySelector("li:last-child")
+    lastElemnt.remove()
+</script>
+</html>

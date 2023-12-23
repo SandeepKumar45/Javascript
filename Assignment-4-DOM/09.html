@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <button class="login">Login</button>
+     <button class="logout">Logout</button>
+     <h1 class="status"></h1>
+</body>
+<script>
+    const login = document.querySelector(".login")
+    const logout = document.querySelector(".logout")
+    let msg = document.querySelector(".status")
+    login.addEventListener('click',()=>{
+        msg.textContent = "User is logged In"
+        localStorage.setItem("status","Logged In")
+    })
+    logout.addEventListener('click',()=>{
+        msg.textContent = "User Has Not logged In"
+        localStorage.removeItem("status")
+    })
+</script>
+</html>

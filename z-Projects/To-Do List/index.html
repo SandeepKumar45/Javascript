@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            background-color: #313131;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            background-color: #fff;
+            width: 400px;
+            padding: 25px 20px;
+            border-radius: 10px;
+        }
+        .heading{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .heading h1{
+            font-size: 25px;
+            color: rgb(0, 36, 113);
+            font-weight: 800;
+        }
+        .heading img{
+            width: 25px;
+            height: 25px;
+        }
+        .addTask{
+            border: 1px solid black;
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 25px;
+            background-color: #f1eded;
+            border-style: none;
+        }
+        .addTask input{
+            flex: 1;
+            padding: 15px 20px;
+            outline: none;
+            border-style: none;
+            border-radius: 25px;
+            font-size: 17px;
+            background-color: #f1eded;
+        }
+        .addTask button{
+            padding: 15px 35px;
+            border-radius: 25px;
+            background-color: #ff641c;
+            color: aliceblue;
+            font-size: 17px;
+            border-style: none;
+            cursor: pointer;
+        }
+        .taskList{
+            margin-top: 30px;
+        }
+        .taskContent{
+            height: auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 10px;
+        }
+        .task{
+             display: flex;
+             max-width: 94%;
+             gap: 8px;
+        }
+        .task p{
+             overflow: auto;
+            word-wrap: break-word; 
+            cursor: pointer;
+        }
+        .mark{
+            border: 1px solid rgb(190, 181, 181);
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .delete{
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .delete:hover{
+            background-color: rgb(245, 241, 241);
+        }
+        .taskContent img{
+            width: 16px;
+            height: 16px;
+        }
+        i{
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1>To-Do List</h1>
+            <img src="https://cdn-icons-png.flaticon.com/128/7246/7246748.png" alt="">
+        </div>
+        <div class="addTask">
+            <input type="text" name="" id="" placeholder="Add your task">
+            <button>Add</button>
+        </div>
+        <div class="taskList">
+            <!-- <div class="taskContent">
+                <div class="task">
+                    <div class="mark"><i class="fa-solid fa-check" style="color: #fcfcfc;"></i></div>
+                    <p>Create a javaScript project</p>
+                </div>
+                <div class="delete">
+                    <img src="https://cdn-icons-png.flaticon.com/128/9312/9312232.png" alt="">
+                </div>
+            </div> -->
+        </div>
+    </div>
+</body>
+<script>
+    const task = document.querySelector("input");
+    document.querySelector(".addTask button").addEventListener('click',()=>{
+        if (task.value=='') {
+            alert("Enter your task");
+        }
+        else{
+        document.querySelector(".taskList").innerHTML += `<div class="taskContent">
+                <div class="task">
+                    <div class="mark"></div>
+                    <p>${task.value}</p>
+                </div>
+                <div class="delete">
+                    <img src="https://cdn-icons-png.flaticon.com/128/9312/9312232.png" alt="">
+                </div>
+            </div>`
+            task.value = '';
+            saveData();
+        }
+    })
+
+
+    document.querySelector(".taskList").addEventListener("click",(e)=>{
+        console.log(e.target);
+        console.log(e.target.tagName);
+        if (e.target.parentNode.className == 'delete') {
+            e.target.parentNode.parentNode.remove()
+            saveData();
+        }
+       else if (e.target.tagName == 'P' && e.target.style.textDecoration == "line-through") {
+        e.target.style.textDecoration = "none";
+        e.target.previousElementSibling.innerHTML = "";
+        e.target.previousElementSibling.style.backgroundColor = "white";
+        saveData();
+       }
+       else if(e.target.tagName == 'P'){
+        e.target.style.textDecoration = "line-through";
+        e.target.previousElementSibling.innerHTML = `<i class="fa-solid fa-check" style="color: #fcfcfc;"></i>`;
+        e.target.previousElementSibling.style.backgroundColor = "#ff641c";
+        saveData();
+       }
+    })
+
+    function saveData(){
+        localStorage.setItem("data",document.querySelector(".taskList").innerHTML);
+    }
+
+    function showTask(){
+        document.querySelector(".taskList").innerHTML = localStorage.getItem("data");
+    }
+    showTask();
+
+</script>
+</html>

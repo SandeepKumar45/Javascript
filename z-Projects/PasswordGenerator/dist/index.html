@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-800 text-white">
+    <div class="container border w-[80%] max-w-[600px] ml-16 mt-[200px] py-9 px-7">
+        <div><span class="text-2xl font-semibold">Generate a</span><br><span class="text-3xl text-green-600 border-b-2 border-green-600 pb-2 font-semibold">Random Password</span></div>
+
+        <!-- Password box -->
+        <div class="mt-10 borde flex justify-between items-center bg-white px-2 rounded-sm w-[90%]"><input type="text" name="" id="passwordBox" placeholder="Password" class="p-2 py-3 text-black font-semibold outline-0"><img src="../copy.png" alt="" class="h-[30px] cursor-pointer" onclick="copyPassword()"></div>
+
+        <!-- PassWord Generate Button -->
+        <div class="bg-green-900 w-[180px] p-2 font-semibold mt-5 text-center cursor-pointer" id="passwordbtn">Generate Password</div>
+    </div>
+</body>
+<script>
+    let passwordBox = document.getElementById("passwordBox");
+    const passwordBtn = document.getElementById("passwordbtn");
+
+    const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+    const number = "0123456789";
+    const symbol = "@#$%^&*()_+~|}{[]></-=";
+
+    const allchars = upperCase+lowerCase+number+symbol;
+
+    passwordBtn.addEventListener('click',()=>{
+        let randomPassword = generatePassword();
+        passwordBox.value = randomPassword;
+    })
+
+    function generatePassword(){
+        let length = 12;
+        let password = "";
+        let i = 1;
+        while(i<=length){
+            password+= allchars[Math.floor(Math.random()*allchars.length)];
+            i++;
+        }
+        return password;
+    }
+
+    function copyPassword(){
+        passwordBox.select();
+        document.execCommand("copy");
+    }
+</script>
+</html>

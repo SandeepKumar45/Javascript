@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .darkTheme{
+            background-color: #212121;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="mode">This is Light Mode</h2>
+    <button id="btn">Toggle Theme</button>
+</body>
+<script>
+    let mode = document.getElementById("mode")
+    const button = document.getElementById("btn")
+    button.addEventListener('click',()=>{
+        document.body.classList.toggle("darkTheme")
+        if(document.body.className=="darkTheme"){
+            mode.innerText = "This is Dark Mode"
+            mode.style.color = "white"
+        }
+        else{
+            mode.innerText = "This is Light Mode"
+            mode.style.color = "black"
+
+        }
+    })
+</script>
+</html>

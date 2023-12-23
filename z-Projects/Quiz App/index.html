@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #0e1f43;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 500px;
+            background-color: #ffffff;
+            color: #0e1f43;
+            padding: 20px 20px;
+            border-radius: 7px;
+        }
+
+        h1 {
+            font-size: 25px;
+            margin: 10px 0px;
+        }
+
+        .question {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        ul {
+            margin-top: 20px;
+            list-style: none;
+        }
+
+        li {
+            font-size: 15px;
+            border: 1px solid #0e1f43;
+            border-radius: 3px;
+            padding: 7px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background-color: black !important;
+            color: white;
+        }
+
+        .next {
+            width: 120px;
+            background-color: #0e1f43;
+            color: #ffffff;
+            font-size: 12px;
+            padding: 9px 0px;
+            border-radius: 4px;
+            margin: 30px auto 15px;
+            text-align: center;
+        }
+
+        .next {
+            display: none;
+        }
+
+        .score {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .playAgain {
+            width: 120px;
+            background-color: #0e1f43;
+            color: #ffffff;
+            font-size: 12px;
+            padding: 9px 0px;
+            border-radius: 4px;
+            margin: 30px auto 15px;
+            text-align: center;
+            display: none;
+        }
+
+        .head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .head img {
+            width: 25px;
+            height: 25px;
+        }
+
+        .head>div {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            gap: 3px;
+        }
+
+        .timeRemain {
+            /* font-size: 20px; */
+            margin-top: 3px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="head">
+            <h1>Simple Quiz</h1>
+            <div>
+                <img src="https://cdn-icons-png.flaticon.com/128/1842/1842869.png" alt="">
+                <div class="timeRemain">00:00:00</div>
+            </div>
+        </div>
+        <hr>
+        </hr>
+        <h3 class="question">1. Which is largest animal in the world?</h3>
+        <ul class="options">
+            <li class="opt1" id="1">Shark</li>
+            <li class="opt2" id="2">Blue whale</li>
+            <li class="opt3" id="3">Elephant</li>
+            <li class="opt4" id="4">Giraffe</li>
+        </ul>
+        <div class="next">Next</div>
+        <div class="score">You scored 2 out of 4!</div>
+        <div class="playAgain">Play Again</div>
+    </div>
+</body>
+<script>
+    let questions = [];
+    let option1 = [];
+    let option2 = [];
+    let option3 = [];
+    let option4 = [];
+    let answers = [];
+
+    const options = document.querySelector(".options");
+
+    let interval = "";
+
+    function addQuestion(question, opt1, opt2, opt3, opt4, ans) {
+        questions.push(question);
+        option1.push(opt1);
+        option2.push(opt2);
+        option3.push(opt3);
+        option4.push(opt4);
+        answers.push(ans);
+    }
+
+    addQuestion("Which is largest animal in the world?", "Shark", "Blue whale", "Elephant", "Giraffe", 2);
+
+    addQuestion("Which is the smallest country in the world?", "Vatican City", "Bhutan", "Nepal", "Sri Lanka", 1);
+
+    addQuestion("Which is the largest desert in the world?", "Kalahari", "Gobi", "Sahara", "Antarcita", 4);
+
+    addQuestion("Which is the smallest continent in the world?", "Asia", "Australia", "Arctic", "Africa", 2);
+
+
+
+    const totalMark = questions.length;
+    let scoredMark = 0;
+    let questionNo = 0;
+
+
+    function displayQuestion() {
+        bgcWhite();
+        document.querySelector(".playAgain").style.display = "none";
+        document.querySelector(".next").style.display = "none";
+        options.style.pointerEvents = "auto";
+        if (questionNo < questions.length) {
+            document.querySelector(".question").innerText = questions[questionNo];
+            document.querySelector(".opt1").innerText = option1[questionNo];
+            document.querySelector(".opt2").innerText = option2[questionNo];
+            document.querySelector(".opt3").innerText = option3[questionNo];
+            document.querySelector(".opt4").innerText = option4[questionNo];
+            questionNo++;
+        }
+        else {
+            quizEnd();
+        }
+    }
+    displayQuestion();
+
+    function quizEnd(){
+        console.log(interval);
+        clearInterval(interval);
+        document.querySelector(".question").style.display = "none";
+            document.querySelector(".options").style.display = "none";
+            document.querySelector(".next").style.display = "none";
+            document.querySelector(".score").style.display = "block";
+            displayScore();
+    }
+
+    document.querySelectorAll("li").forEach((item) => {
+        item.addEventListener('click', (e) => {
+            if (e.target.id == answers[questionNo - 1]) {
+                e.target.style.backgroundColor = "#A1E0BC";
+                scoredMark++;
+                document.querySelector(".next").style.display = "block";
+            }
+            else {
+                e.target.style.backgroundColor = "#F9978F";
+                options.children[answers[questionNo - 1] - 1].style.backgroundColor = "#A1E0BC";
+                document.querySelector(".next").style.display = "block";
+            }
+            options.style.pointerEvents = "none";
+        })
+    })
+
+    document.querySelector(".next").addEventListener('click', () => {
+        displayQuestion();
+    })
+
+    function bgcWhite() {
+        document.querySelectorAll("li").forEach((item) => {
+            item.style.backgroundColor = "white";
+        })
+    }
+
+    function displayScore() {
+        document.querySelector(".score").innerText = `You scored ${scoredMark} out of ${totalMark}!`
+        document.querySelector(".playAgain").style.display = "block";
+    }
+
+    document.querySelector(".playAgain").addEventListener('click', () => {
+        scoredMark = 0;
+        questionNo = 0;
+        document.querySelector(".score").style.display = "none";
+        displayQuestion();
+        document.querySelector(".question").style.display = "block";
+        document.querySelector(".options").style.display = "block";
+        countDown(0, 0, 30);
+    })
+
+
+    function countDown(hours, minutes, seconds) {
+        let total = ((hours * 3600) + (minutes * 60) + seconds);
+         interval = setInterval(() => {
+            if (total >= 0) {
+                let hr = Math.floor(total / 3600);
+                let min = (Math.floor(total / 60)) - (hr * 60);
+                let sec = total - ((hr * 3600) + (min * 60));
+
+                let time = `${hr.toString().padStart(2, "0")}:${min.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
+
+                document.querySelector(".timeRemain").textContent = time;
+            }
+            else {
+                clearInterval(interval);
+                quizEnd();
+            }
+            total--;
+        }, 1000);
+    }
+
+    countDown(0, 0, 30);
+
+</script>
+
+</html>

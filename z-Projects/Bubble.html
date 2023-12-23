@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        height: 100vh;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(152, 200, 139);
+      }
+      .box {
+        width: 80%;
+        height: 80%;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .tbox {
+        display: flex;
+        justify-content: center;
+        gap: 10%;
+        align-items: center;
+        width: 100%;
+        height: 80px;
+        background-color: rgb(32, 97, 32);
+        padding: 5px;
+      }
+      .hit {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #ffffff;
+        font-family: sans-serif;
+      }
+      .hitbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        width: 30px;
+        height: 20px;
+        padding: 5px 0px;
+        border-radius: 3px;
+        color: rgb(31, 80, 31);
+        font-weight: bold;
+      }
+      .bbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0px 10px;
+        width: 100%;
+        height: calc(100% - 80px);
+      }
+      .bubble {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        background-color: #2b5a2b;
+        color: #ffffff;
+        font-weight: bold;
+      }
+      .bubble:hover {
+        background-color: #336c33;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="tbox">
+          <div class="hit">
+            <p>Hit</p>
+            <div class="hitbox hitb"></div>
+          </div>
+          <div class="hit">
+            <p>Timer</p>
+            <div class="hitbox timer">60</div>
+          </div>
+          <div class="hit">
+            <p>Score</p>
+            <div class="hitbox score">0</div>
+          </div>
+        </div>
+
+        <div class="bbox"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let hitVal = 0;
+    function makeBubbles() {
+      let bubbles = "";
+      for (let i = 1; i < 217; i++) {
+        let random = Math.floor(Math.random() * 10);
+        bubbles += `<div class="bubble">${random}</div>`;
+      }
+      document.querySelector(".bbox").innerHTML = bubbles;
+    }
+
+    function timer() {
+      let time = 60;
+      let timeint = setInterval(() => {
+        if (time > 0) {
+          time--;
+          document.querySelector(".timer").textContent = time;
+        } else {
+            document.querySelector(".bbox").textContent = `Game Over`
+            document.querySelector(".hitb").textContent = ""
+            document.querySelector(".score").style.color = "red"
+          clearInterval(timeint);
+        }
+      }, 1000);
+    }
+
+    function newHit() {
+      hitVal = Math.floor(Math.random() * 10);
+      document.querySelector(".hitb").textContent = hitVal;
+    }
+
+    function hitBubble() {
+      document.querySelector(".bbox").addEventListener("click", (e) => {
+        let selectVal = Number(e.target.textContent);
+        if (selectVal === hitVal) {
+          let scoreVal = document.querySelector(".score").textContent;
+          document.querySelector(".score").textContent = Number(scoreVal) + 10;
+          makeBubbles()
+          newHit()
+        }
+      });
+    }
+
+    newHit();
+    hitBubble();
+    makeBubbles();
+    timer();
+  </script>
+</html>

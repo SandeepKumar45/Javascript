@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1{
+            color: #ffffff;
+            font-size: 9vh;
+            font-weight: 900;
+            font-family: sans-serif;
+        }
+        #pointer{
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            transition: all linear 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <h1>SANDEEP</h1>
+    <div id="pointer"></div>
+</body>
+<script>
+    let pointer = document.getElementById("pointer")
+    document.body.addEventListener('mousemove',function(e){
+        pointer.style.left = `${e.x}px`
+        pointer.style.top = `${e.y}px`
+    })
+</script>
+</html>

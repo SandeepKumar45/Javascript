@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="babu">hello</div>
+    <button id="btn">click me</button>
+</body>
+<script>
+    document.title = "DOM"
+    document.querySelector("div").removeAttribute("id")
+
+
+    function handleClick(){
+        alert('clicked')
+    }
+    document.getElementById("btn").addEventListener('click',handleClick)
+    // document.getElementById("btn").addEventListener('click',handleClick,{once:"true"})
+
+    //  Remove Event
+    setTimeout(function(){
+        document.getElementById("btn").removeEventListener("click",handleClick)
+    },3000)
+</script>
+</html>
